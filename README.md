@@ -31,3 +31,9 @@ This script detects person in video file. Test video file is present in video di
 
 9. Person Tracking:
 This script detects person and keeps tracking them in the frame. It assigns a unique ID to each detected person.
+
+10. Monitor Social Distance
+This script monitors social distance between the persons. If it is less than a threshold value, we display bounding box in red otherwise green.
+
+11. Drawing tracking line:
+This script draws a line denoting where the person has entered in the frame and where he has moved in the frame. 
