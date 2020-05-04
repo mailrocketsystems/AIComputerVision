@@ -6,8 +6,9 @@ import numpy as np
 protopath = "deploy.prototxt"
 modelpath = "res10_300x300_ssd_iter_140000.caffemodel"
 detector = cv2.dnn.readNetFromCaffe(prototxt=protopath, caffeModel=modelpath)
-detector.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
-detector.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
+# Only enable it if you are using OpenVino environment
+# detector.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
+# detector.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
 def main():
     cap = cv2.VideoCapture('test_video.mp4')
