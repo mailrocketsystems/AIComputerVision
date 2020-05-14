@@ -9,7 +9,6 @@ import math
 protopath = "MobileNetSSD_deploy.prototxt"
 modelpath = "MobileNetSSD_deploy.caffemodel"
 detector = cv2.dnn.readNetFromCaffe(prototxt=protopath, caffeModel=modelpath)
-# Only enable it if you are using OpenVino environment
 # detector.setPreferableBackend(cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE)
 # detector.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
@@ -19,7 +18,7 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
            "dog", "horse", "motorbike", "person", "pottedplant", "sheep",
            "sofa", "train", "tvmonitor"]
 
-tracker = CentroidTracker(maxDisappeared=80, maxDistance=90)
+tracker = CentroidTracker(maxDisappeared=40, maxDistance=50)
 
 
 def non_max_suppression_fast(boxes, overlapThresh):
@@ -69,7 +68,6 @@ def main():
     fps_start_time = datetime.datetime.now()
     fps = 0
     total_frames = 0
-    centroid_dict = dict()
 
     while True:
         ret, frame = cap.read()
@@ -98,7 +96,7 @@ def main():
         boundingboxes = np.array(rects)
         boundingboxes = boundingboxes.astype(int)
         rects = non_max_suppression_fast(boundingboxes, 0.3)
-
+        centroid_dict = dict()
         objects = tracker.update(rects)
         for (objectId, bbox) in objects.items():
             x1, y1, x2, y2 = bbox
