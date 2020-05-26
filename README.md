@@ -37,3 +37,9 @@ This script monitors social distance between the persons. If it is less than a t
 
 11. Drawing tracking line:
 This script draws a line denoting where the person has entered in the frame and where he has moved in the frame. 
+
+12. Face Mask Detection: 
+This script checks if a person is wearing face mask or not
+
+13. Person Counter:
+This script counts the number of person present in the frame.
