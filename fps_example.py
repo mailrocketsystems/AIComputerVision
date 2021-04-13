@@ -37,7 +37,4 @@ def main():
             cv2.destroyAllWindows()
             break
 
-    cv2.destroyAllWindows()
-
-
 main()
