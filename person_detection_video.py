@@ -16,18 +16,21 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
            "dog", "horse", "motorbike", "person", "pottedplant", "sheep",
            "sofa", "train", "tvmonitor"]
 
-
 def main():
     cap = cv2.VideoCapture('test_video.mp4')
-
+    
+    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     fps_start_time = datetime.datetime.now()
     fps = 0
-    total_frames = 0
+    current_frame = 0
 
     while True:
         ret, frame = cap.read()
         frame = imutils.resize(frame, width=600)
-        total_frames = total_frames + 1
+        current_frame = current_frame + 1
+        if current_frame >= total_frames:
+            print("End of video reached. We're done.")
+            break
 
         (H, W) = frame.shape[:2]
 
@@ -54,7 +57,7 @@ def main():
         if time_diff.seconds == 0:
             fps = 0.0
         else:
-            fps = (total_frames / time_diff.seconds)
+            fps = (current_frame / time_diff.seconds)
 
         fps_text = "FPS: {:.2f}".format(fps)
 
